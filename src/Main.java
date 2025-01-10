@@ -12,10 +12,15 @@ public class Main {
         map.put("b", 2);
         map.put("b", map.get("b") + 1);
         map.put("c", 3);
+        map.put("c", 4);
 
         //Gets all the values and keys
         for (String key : map.keySet()) {
             System.out.println("Key: " + key + " Value: " + map.get(key));
+        }
+
+        for(Map.Entry<String, Integer> entry : map.entrySet()) {
+            System.out.println("Key: " + entry.getKey() + " Value: " + entry.getValue());
         }
 
 
@@ -37,5 +42,11 @@ public class Main {
         map.clear();
         //print the hashmap
         System.out.println(map);
+
+        //Example of StringBuilders
+        StringBuilder sb = new StringBuilder();
+        sb.append("Hello");
+        sb.append(" ");
+
     }
 }
