@@ -39,6 +39,31 @@ Skapar en ny lista med endast namnen på de spel som filtrerats fram.
 ```
 Samlar ihop de filtrerade namnen i en lista.
 
+---
+
+```java
+List<Integer> idList = idNbrs.stream().
+        filter(id -> bugs.getPosts(id).size() > 1).
+        sorted((id1, id2) -> bugs.getPosts(id2).size() - bugs.getPosts(id1).size()).
+        collect(Collectors.toList());
+```
+
+En lista av id-nummer idNbrs filtreras med hjälp av stream och lambda uttryck.
+
+```java
+.filter(id -> bugs.getPosts(id).size() > 1)
+```
+Filtrerar listan idNbrs så att endast de id-nummer vars postlista har mer än ett element visas.
+
+```java
+.sorted((id1, id2) -> bugs.getPosts(id2).size() - bugs.getPosts(id1).size())
+```
+Sorterar de filtrerade id-numren i fallande ordning baserat på antalet element i postlistan.
+
+```java
+.collect(Collectors.toList())
+```
+Samlar ihop de filtrerade och sorterade id-numren i en lista.
 
 ### Huffman Träd
 ```java
@@ -140,6 +165,45 @@ n -> n % 2 == 0
 skapar en funktion som tar ett heltal som argument och returnerar true om talet är jämnt och false om talet är udda.
 
 
+### Rekursion
+Exempel 1
+```
+START_METOD
+    SKAPAR NYTT_OBJEKT
+    ANROPAR REKURSIV_METOD(START, PARAMETER, NYTT_OBJEKT)
+    RETURN NYTT_OBJEKT
+    
+
+REKURSIV_METOD(START, PARAMETER, NYTT_OBJEKT)
+    OM PARAMETER == 0
+        ÄNDRA NYTT_OBJEKT
+    ANNARS
+        ANROPAR REKURSIV_METOD(UPPDATERAD_START, PARAMETER, NYTT_OBJEKT)
+```
+
+
+```java
+public static List<File> biggerThan(File file, int size) {
+    List<File> fileList = new ArrayList<File>();
+    biggerThan(file, size, fileList);
+    return fileList;
+}
+
+private static void biggerThan(File file, int size, List<File> fileList) {
+    if(file.isFile()) {
+        if(file.length() > size) {
+            fileList.add(file);
+        }
+    }
+    else if(file.isDirectory()) {
+        for(File f : file.listFiles()) {
+            biggerThan(f, size, fileList);
+        }
+    }
+}
+```
+
+
 ## EXTRA
 ```java
 Map<String, int[]> games = new HashMap<>();
@@ -160,4 +224,30 @@ public String toString() {
 ```
 TreeMap är en sorterad map som sorterar efter nyckeln. I exemplet ovan så kommer TreeMap att sortera efter nyckeln i bokstavsordning. HashMap däremot sorterar inte efter nyckeln. 
 
+## Trick inför tenta
+Ifall din toString() metod ibland ger rätt men ibland fel så testa att byta till TreeMap eller HashMap.
+* TreeMap: Sorterar efter nyckeln
+* HashMap: Sorterar inte efter nyckeln
+
+---
+Glöm inte sätta size på LinkedLists!
 ```java
+public void drop(int n) {
+    if(n < 0) {
+        throw new IllegalArgumentException("Negativ");
+    }
+    
+    if(size < n) {
+        first = null;
+        size = 0; //Glöm inte sätta size på LinkedLists!
+    } 
+    
+    else {
+        for(int i = 0; i < n; i++) {
+            first = first.next;
+            size--;
+        }
+    }
+}
+```
+Denna funtkion tar bort n första elementen i en LinkedList. Om n är mindre än 0 så kastas ett IllegalArgumentException. Om n är större än storleken på listan så sätts first till null och size till 0. Annars så loopas listan igenom n gånger och first sätts till nästa element och size minskas med 1.

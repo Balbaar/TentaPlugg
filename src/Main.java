@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Main {
     //easy example of hashmaps
@@ -48,5 +46,17 @@ public class Main {
         sb.append("Hello");
         sb.append(" ");
 
+
+        //Small example of Set<String>
+        Set<String> set = new HashSet<>();
+        set.add("a");
+        set.add("b");
+        set.add("b");
+        set.add("c");
+
+        //Prints out the set
+        System.out.println(set);
+        //Checks if the set contains a value
+        System.out.println(set.contains("a"));
     }
 }

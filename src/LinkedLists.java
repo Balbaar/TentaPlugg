@@ -33,6 +33,48 @@ public class LinkedLists<E> {
         first = newFirst;
     }
 
+    public void drop(int n) {
+        if(n < 0) {
+            throw new IllegalArgumentException("Negativ");
+        }
+
+        if(size < n) {
+            first = null;
+        }
+
+        else {
+            for(int i = 0; i < n; i++) {
+                first = first.next;
+                size--;
+            }
+        }
+    }
+
+    public void add(E i) {
+        ListNode<E> newNode = new ListNode<>(i);
+        if (first == null) {
+            first = newNode;
+        } else {
+            ListNode<E> current = first;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newNode;
+        }
+        size++;
+    }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        ListNode<E> current = first;
+        while (current != null) {
+            sb.append(current.element);
+            sb.append(" ");
+            current = current.next;
+        }
+        return sb.toString();
+    }
+
     // övriga metoder - ska inte användas i lösningen av uppgiften
 
     /* Nästlad klass. Representerar en nod med ett element av typen E. */
