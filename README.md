@@ -203,6 +203,22 @@ private static void biggerThan(File file, int size, List<File> fileList) {
 }
 ```
 
+### Strings, Charachters och StringBuilder
+```java
+String s = "Hello";
+char c = s.charAt(0); // 'H'
+```
+Hämtar tecknet på position 0 i strängen s.
+```java
+String s = "Hello";
+for(char c : s.toCharArray()) {
+    System.out.println(c);
+}
+```
+Skriver ut varje tecken i strängen s.
+
+
+
 
 ## EXTRA
 ```java

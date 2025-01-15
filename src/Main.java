@@ -58,5 +58,11 @@ public class Main {
         System.out.println(set);
         //Checks if the set contains a value
         System.out.println(set.contains("a"));
+
+        String str = "ABCBA";
+        String str2 = "ABCCBA";
+
+        Character c = 'A';
+
     }
 }
